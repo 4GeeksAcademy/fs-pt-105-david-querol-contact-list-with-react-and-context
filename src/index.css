@@ -1,0 +1,9 @@
+/* to show and hide the eddit buttons */
+.father-btn .show-it {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.father-btn:hover .show-it {
+    opacity: 1;
+}

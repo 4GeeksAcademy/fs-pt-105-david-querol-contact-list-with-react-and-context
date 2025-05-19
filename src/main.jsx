@@ -4,6 +4,7 @@ import './index.css'  // Global styles for your application
 import { RouterProvider } from "react-router-dom";  // Import RouterProvider to use the router
 import { router } from "./routes";  // Import the router configuration
 import { StoreProvider } from './hooks/useGlobalReducer';  // Import the StoreProvider for global state management
+import { Home } from "./pages/Home.jsx"
 
 const Main = () => {
     return (
@@ -12,8 +13,11 @@ const Main = () => {
             <StoreProvider> 
                 {/* Set up routing for the application */} 
                 <RouterProvider router={router}>
+                    <Home />
                 </RouterProvider>
-            </StoreProvider>
+             </StoreProvider>
+         
+        
         </React.StrictMode>
     );
 }
