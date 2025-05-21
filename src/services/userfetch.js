@@ -3,38 +3,16 @@
 const genericUrl = "https://playground.4geeks.com/contact";
 const user = "david"
 
-//Function Post Create User if there is not on the API DB.
-const postCreateUser = async () => {
-	try {
-		const response = await fetch(`${genericUrl}/agendas/${user}`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-		})
-		console.log("Creando Usuario:", user)
-		const data = await response.json();
-		console.log("Creado el Usuario:", data.slug, "con el ID", data.id);
-		FetchGetContacts();
-
-	} catch (error) {
-		console.error('Error al crear el usuario', error);
-	}
-}
-
 //Function Get Contacts from API DB
 export const FetchGetContacts = async () => {
 	try {
 		const response = await fetch(`${genericUrl}/agendas/${user}`);
-		const data = await response.json();
 
-		if (response.ok) {
-			return data.contacts;
-		} else {
-			console.log("No existe el usuario.");
-			postCreateUser();
-			return [];
+		if (!response.ok) {
+			if (response.status === 404) return [];
 		}
-
-
+		const data = await response.json();
+		return Array.isArray(data.contacts) ? data.contacts : [];
 	} catch (error) {
 		console.error('Error al obtener los datos de la API', error)
 		return [];
@@ -51,11 +29,12 @@ export const FetchDeleteContact = async (id) => {
 			}
 		})
 		if (!response.ok) {
-			console.log("error al ejecutar el borrado")
+			console.log("error al ejecutar el borrado", response.status)
+			return false;
 		};
 		return true;
 	} catch (error) {
-		console.log('Error al borrar los datos');
+		console.log('Error al borrar los datos', error);
 	}
 }
 
@@ -69,13 +48,15 @@ export const FetchPostContact = async (item) => {
 			},
 			body: JSON.stringify(item)
 		})
-		if (response.ok) {
-
+		if (!response.ok) {
+			console.log('error en la consulta', response.status);
+			}
 			const data = await response.json();
 			return data;
-		}
+		
 	} catch (error) {
-		console.log('Error al realizar el PUT en el servidor');
+		console.log('Error al realizar el POST en el servidor', error);
+		return false;
 	}
 }
 
@@ -83,7 +64,6 @@ export const FetchPostContact = async (item) => {
 export const FetchPutContact = async (id, item) => {
 
 	try {
-		console.log(id);
 		const response = await fetch(`${genericUrl}/agendas/${user}/contacts/${id}`, {
 			method: "PUT",
 			headers: {
@@ -91,12 +71,14 @@ export const FetchPutContact = async (id, item) => {
 			},
 			body: JSON.stringify(item),
 		})
-		if (response.ok) {
-
+		if (!response.ok) {
+			console.log('error en la consulta', response.status)
+			}
 			const data = await response.json();
 			return data;
-		}
+		
 	} catch (error) {
 		console.log('Error al realizar el PUT en el servidor');
+		return false;
 	}
 }

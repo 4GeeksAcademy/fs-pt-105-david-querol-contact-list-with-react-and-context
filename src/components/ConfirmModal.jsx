@@ -10,11 +10,11 @@ export const ConfirmModal = ({show, onClose, onConfirm, contactName}) =>{
             tabIndex="-1"
         >
 
-            <div className="modal-dialog">
-                <div className="modal-content">
+            <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content rounded-0 shadow">
 
-                    <div className="modal-header">
-                        <h5 className="modal-title">{`¿Estás Seguro de borrar este contacto ${contactName}?`}</h5>
+                    <div className="modal-header border-0">
+                        <h5 className="modal-title">{`¿Estás Seguro de borrar a ${contactName}?`}</h5>
                         <button type="button" className="btn-close" onClick={onClose}></button>
                     </div>
 
@@ -22,11 +22,11 @@ export const ConfirmModal = ({show, onClose, onConfirm, contactName}) =>{
                         Esta acción no puede deshacerse.
                     </div>
 
-                    <div className="modal-footer">
-                        <button className="btn btn-secondary" onClick={onClose}>
+                    <div className="modal-footer border-0">
+                        <button className="btn btn-secondary rounded-0" onClick={onClose}>
                             Cancelar
                         </button>
-                        <button className="btn btn-danger" onClick={onConfirm}>
+                        <button className="btn btn-danger rounded-0" onClick={onConfirm}>
                             Borrar
                         </button>
                     </div>

@@ -54,13 +54,13 @@ export const Home = () => {
 
 	return (
 		<>
-			<div>
+			<div className="bg-light px-2" style={{ minHeight: `100vh` }}>
 				<div
-					className="border-0 card rounded-0 container-fluid align-items-end p-0 my-4"
-					style={{ maxWidth: `90vh` }}
+					className="border-0 card bg-transparent container-fluid align-items-end pe-0 py-4"
+					style={{ maxWidth: `70vh` }}
 				>
 					<Link to="/addcontact">
-						<button className="btn btn-success">Añade Contacto</button>
+						<button className="btn btn-success rounded-0">Añade Contacto</button>
 					</Link>
 				</div>
 
@@ -79,6 +79,9 @@ export const Home = () => {
 					)
 				}
 				)}
+				
+				<div className="pb-5 "></div>
+
 				<ConfirmModal
 					show={showModal}
 					onClose={() => setShowModal(false)}

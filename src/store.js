@@ -13,7 +13,7 @@ export const storeReducer = (store, action = {}) => {
         ...store,
         contacts: action.payload
       };
-    case 'updated_content':  //Update content of a existing contact
+    case 'update_contact':  //Update content of a existing contact
       return {
         ...store,
         contacts: store.contacts.map((item) => item.id === action.payload.id ? action.payload : item)

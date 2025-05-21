@@ -20,14 +20,14 @@ export const AddContact = () => {
   //USE STATES
   // Object dafault with not editing contact. 
   const [contact, setContact] = useState({
-    "name": "Escribe el nombre",
-    "phone": "Escribe el Teléfono",
-    "email": "Escribe el e-mail",
-    "address": "Escribe la dirección"
+    "name": "",
+    "phone": "",
+    "email": "",
+    "address": ""
   });
 
   //Set the state edditing or creating.
-  const [editingMode, setEdittingMode] = useState(false);
+  const [editingMode, setEditingMode] = useState(false);
 
   //Change contact state if we are modifying one element
   useEffect(() => {
@@ -35,7 +35,7 @@ export const AddContact = () => {
       const contactId = contacts.find(c => c.id === parseInt(id));
       if (contactId) {
         setContact(contactId);
-        setEdittingMode(true);
+        setEditingMode(true);
       }
     }
 
@@ -55,7 +55,7 @@ export const AddContact = () => {
       if (id) {
         const isUpdated = await FetchPutContact(id, contact);
         if (isUpdated) {
-          dispatch({ type: "updated_content", payload: isUpdated })
+          dispatch({ type: "update_contact", payload: isUpdated })
           navigate("/");
         }
       } else {
@@ -71,14 +71,14 @@ export const AddContact = () => {
   }
 
   return (
-    <>
-      <form className="row g-3 m-5 justify-content-center" onSubmit={handleSubmit}>
-        <div className="col-md-9">
-          <h1 className="text-center mb-3">{!editingMode ? `Añade un nuevo contacto` : `Actualiza la información`}</h1>
+    <div className="bg-light pt-5" style={{ minHeight: `100vh` }}>
+      <form className="row g-3 justify-content-center mx-2" onSubmit={handleSubmit}>
+        <div className="col-md-8 col-lg-6">
+          <h1 className="text-center mb-5">{!editingMode ? `Añade un nuevo contacto` : `Actualiza la información`}</h1>
           <label className="form-label">Nombre Completo</label>
           <input
             type="text"
-            className="form-control mb-4"
+            className="form-control mb-4 rounded-0"
             name="name"
             value={contact.name}
             onChange={handleChange}
@@ -86,7 +86,7 @@ export const AddContact = () => {
           <label className="form-label">E-mail</label>
           <input
             type="text"
-            className="form-control mb-4"
+            className="form-control mb-4 rounded-0"
             name="email"
             value={contact.email}
             onChange={handleChange}
@@ -94,7 +94,7 @@ export const AddContact = () => {
           <label className="form-label">Número de teléfono</label>
           <input
             type="text"
-            className="form-control mb-4"
+            className="form-control mb-4 rounded-0"
             name="phone"
             value={contact.phone}
             onChange={handleChange}
@@ -102,17 +102,17 @@ export const AddContact = () => {
           <label className="form-label">Dirección</label>
           <input
             type="text"
-            className="form-control mb-4"
+            className="form-control mb-4 rounded-0"
             name="address"
             value={contact.address}
             onChange={handleChange}
           />
-          <div className="d-grid gap-2">
-            <button className="btn btn-primary" type="submit">{!editingMode ? "Guardar" : "Actualizar"}</button>
+          <div className="d-grid gap-2 pt-3">
+            <button className="btn btn-success rounded-0" type="submit">{!editingMode ? "Guardar" : "Actualizar"}</button>
           </div>
-          <Link to="/">{!editingMode ? "o volver a contactos sin guardar." : "o volver a contactos sin acutalizar."}</Link>
+          <Link to="/" className="text-success">{!editingMode ? "o volver a contactos sin guardar." : "o volver a contactos sin acutalizar."}</Link>
         </div>
       </form>
-    </>
+    </div>
   );
 };

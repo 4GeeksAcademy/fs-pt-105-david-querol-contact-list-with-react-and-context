@@ -5,8 +5,8 @@ export const ContactCard = ({item, onEdit, onDelete})=>{
     
     return (           
         <div  
-            className="card rounded-0 container-fluid" 
-            style={{maxWidth: `90vh`}} 
+            className="card rounded-0 container-fluid mb-1" 
+            style={{maxWidth: `70vh`}} 
             >
             <div className="row align-items-center">
                 <div className="col-md-3 text-center">
@@ -22,7 +22,7 @@ export const ContactCard = ({item, onEdit, onDelete})=>{
                                 <div className="d-flex father-btn">
                                     <div 
                                         className="button btn-primary show-it "
-                                        onClick={()=> onEdit(item.id)}>
+                                        onClick={()=> onEdit()}>
                                             <FontAwesomeIcon icon={faPencil} />
                                     </div>
                                     <div 
